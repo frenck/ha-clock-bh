@@ -3,20 +3,78 @@
 [![HACS Action](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml/badge.svg)](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml)
 [![hassfest](https://github.com/iret33/ha-clock-bh/actions/workflows/hassfest.yml/badge.svg)](https://github.com/iret33/ha-clock-bh/actions/workflows/hassfest.yml)
 
-A Home Assistant custom integration that provides accurate world time from [clock.bh](https://clock.bh) - the official Bahrain NTP Time Server.
-
-## About clock.bh
-
-[clock.bh](https://clock.bh) is a free, public NTP (Network Time Protocol) server for the Kingdom of Bahrain, offering accurate time synchronization for servers, computers, and IoT devices in the Middle East region.
+A Home Assistant custom integration that provides accurate world time from [clock.bh](https://clock.bh) - the official Bahrain NTP Time Server. Includes a beautiful animated Lovelace card matching the clock.bh design.
 
 ## Features
 
+- **Animated Lovelace Card** - Beautiful SVG clock matching clock.bh design
 - **Any Timezone Support** - Select from 400+ timezones worldwide
 - **Multiple Instances** - Add multiple clocks for different timezones
 - Synced with atomic clocks via clock.bh NTP server
-- Automatic updates every 30 seconds
-- UI-based configuration (no YAML required)
-- Common timezones highlighted for quick selection
+- Bahrain flag colors (Red & Gold)
+- Day/night indicator
+- Light/dark theme support
+
+## Lovelace Card
+
+The integration includes a custom animated clock card with smooth second-hand movement, matching the clock.bh logo design.
+
+### Card Preview
+
+The card features:
+- Smooth animated clock hands (hour, minute, second)
+- Bahrain-inspired colors (#CE1126 red, #C9A66B gold)
+- Digital time display
+- Date display
+- Day/night indicator
+- UTC offset badge
+- Light/dark theme auto-detection
+
+### Card Configuration
+
+```yaml
+type: custom:clock-bh-card
+timezone: Asia/Bahrain
+title: Bahrain
+show_date: true
+show_seconds: true
+theme: auto  # 'light', 'dark', or 'auto'
+size: medium  # 'small', 'medium', or 'large'
+```
+
+### Configuration Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `timezone` | string | `Asia/Bahrain` | IANA timezone identifier |
+| `title` | string | Auto from timezone | Custom title for the clock |
+| `show_date` | boolean | `true` | Show current date |
+| `show_seconds` | boolean | `true` | Show second hand and seconds in digital display |
+| `theme` | string | `auto` | Color theme: `light`, `dark`, or `auto` |
+| `size` | string | `medium` | Card size: `small`, `medium`, or `large` |
+
+### Multiple Clocks Example
+
+```yaml
+type: horizontal-stack
+cards:
+  - type: custom:clock-bh-card
+    timezone: America/New_York
+    title: New York
+    size: small
+  - type: custom:clock-bh-card
+    timezone: Europe/London
+    title: London
+    size: small
+  - type: custom:clock-bh-card
+    timezone: Asia/Bahrain
+    title: Bahrain
+    size: small
+  - type: custom:clock-bh-card
+    timezone: Asia/Tokyo
+    title: Tokyo
+    size: small
+```
 
 ## Installation
 
@@ -34,8 +92,11 @@ A Home Assistant custom integration that provides accurate world time from [cloc
 1. Download the `custom_components/clock_bh` folder
 2. Copy it to your `config/custom_components/` directory
 3. Restart Home Assistant
+4. Add the card resource manually if needed:
+   - Go to Settings > Dashboards > Resources
+   - Add `/clock_bh/clock-bh-card.js` as JavaScript Module
 
-## Configuration
+## Sensor Configuration
 
 1. Go to **Settings** > **Devices & Services**
 2. Click **+ Add Integration**
@@ -45,54 +106,9 @@ A Home Assistant custom integration that provides accurate world time from [cloc
 
 You can add multiple instances for different timezones!
 
-## Sensor
+## About clock.bh
 
-This integration creates one sensor entity per configured timezone:
-
-| Entity | Description |
-|--------|-------------|
-| `sensor.clock_bh_[timezone]_time` | Current time in selected timezone |
-
-### Attributes
-
-| Attribute | Description |
-|-----------|-------------|
-| `source` | clock.bh |
-| `timezone` | Selected timezone (e.g., Asia/Bahrain) |
-| `utc_offset` | UTC offset (e.g., +03:00) |
-| `attribution` | Data source credit |
-
-## Example Automation
-
-```yaml
-automation:
-  - alias: "Announce Time in Multiple Cities"
-    trigger:
-      - platform: time_pattern
-        hours: "*"
-        minutes: "0"
-    action:
-      - service: tts.speak
-        data:
-          message: >
-            The time in Bahrain is {{ states('sensor.clock_bh_bahrain_time') }}.
-            In New York it's {{ states('sensor.clock_bh_new_york_time') }}.
-```
-
-## Supported Timezones
-
-The integration supports all standard IANA timezones (400+), including:
-
-**Common Timezones (highlighted):**
-- Asia/Bahrain (default)
-- UTC
-- America/New_York
-- America/Los_Angeles
-- Europe/London
-- Europe/Paris
-- Asia/Dubai
-- Asia/Tokyo
-- Australia/Sydney
+[clock.bh](https://clock.bh) is a free, public NTP (Network Time Protocol) server for the Kingdom of Bahrain, offering accurate time synchronization for servers, computers, and IoT devices in the Middle East region.
 
 ## Links
 
@@ -102,3 +118,7 @@ The integration supports all standard IANA timezones (400+), including:
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+Powered by [clock.bh](https://clock.bh) - Bahrain NTP Time Server
