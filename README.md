@@ -1,9 +1,9 @@
-# Clock.bh - Bahrain Time for Home Assistant
+# Clock.bh - World Time for Home Assistant
 
 [![HACS Action](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml/badge.svg)](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml)
 [![hassfest](https://github.com/iret33/ha-clock-bh/actions/workflows/hassfest.yml/badge.svg)](https://github.com/iret33/ha-clock-bh/actions/workflows/hassfest.yml)
 
-A Home Assistant custom integration that provides accurate Bahrain time from [clock.bh](https://clock.bh) - the official Bahrain NTP Time Server.
+A Home Assistant custom integration that provides accurate world time from [clock.bh](https://clock.bh) - the official Bahrain NTP Time Server.
 
 ## About clock.bh
 
@@ -11,11 +11,12 @@ A Home Assistant custom integration that provides accurate Bahrain time from [cl
 
 ## Features
 
-- Real-time Bahrain time (Arabia Standard Time, UTC+3)
+- **Any Timezone Support** - Select from 400+ timezones worldwide
+- **Multiple Instances** - Add multiple clocks for different timezones
 - Synced with atomic clocks via clock.bh NTP server
 - Automatic updates every 30 seconds
 - UI-based configuration (no YAML required)
-- Device info linking to clock.bh
+- Common timezones highlighted for quick selection
 
 ## Installation
 
@@ -39,30 +40,33 @@ A Home Assistant custom integration that provides accurate Bahrain time from [cl
 1. Go to **Settings** > **Devices & Services**
 2. Click **+ Add Integration**
 3. Search for "Clock.bh"
-4. Click to add the integration
+4. Select your desired timezone from the dropdown
+5. Click Submit
+
+You can add multiple instances for different timezones!
 
 ## Sensor
 
-This integration creates one sensor entity:
+This integration creates one sensor entity per configured timezone:
 
 | Entity | Description |
 |--------|-------------|
-| `sensor.clock_bh_bahrain_time` | Current Bahrain time from clock.bh |
+| `sensor.clock_bh_[timezone]_time` | Current time in selected timezone |
 
 ### Attributes
 
-| Attribute | Value |
-|-----------|-------|
+| Attribute | Description |
+|-----------|-------------|
 | `source` | clock.bh |
-| `timezone` | Asia/Bahrain |
-| `utc_offset` | +03:00 |
-| `attribution` | Time data provided by clock.bh - Bahrain NTP Time Server |
+| `timezone` | Selected timezone (e.g., Asia/Bahrain) |
+| `utc_offset` | UTC offset (e.g., +03:00) |
+| `attribution` | Data source credit |
 
 ## Example Automation
 
 ```yaml
 automation:
-  - alias: "Announce Bahrain Time"
+  - alias: "Announce Time in Multiple Cities"
     trigger:
       - platform: time_pattern
         hours: "*"
@@ -70,8 +74,25 @@ automation:
     action:
       - service: tts.speak
         data:
-          message: "The time in Bahrain is {{ states('sensor.clock_bh_bahrain_time') }}"
+          message: >
+            The time in Bahrain is {{ states('sensor.clock_bh_bahrain_time') }}.
+            In New York it's {{ states('sensor.clock_bh_new_york_time') }}.
 ```
+
+## Supported Timezones
+
+The integration supports all standard IANA timezones (400+), including:
+
+**Common Timezones (highlighted):**
+- Asia/Bahrain (default)
+- UTC
+- America/New_York
+- America/Los_Angeles
+- Europe/London
+- Europe/Paris
+- Asia/Dubai
+- Asia/Tokyo
+- Australia/Sydney
 
 ## Links
 

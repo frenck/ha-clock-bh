@@ -2,16 +2,18 @@
   "config": {
     "step": {
       "user": {
-        "title": "Clock.bh - Bahrain Time",
-        "description": "This integration connects to [clock.bh]({url}) to provide accurate Bahrain time (AST/UTC+3) from the Bahrain NTP Time Server.",
-        "data": {}
+        "title": "Clock.bh - World Time",
+        "description": "This integration connects to [clock.bh]({url}) to provide accurate time in any timezone. Select your desired timezone below.",
+        "data": {
+          "timezone": "Timezone"
+        }
       }
     },
     "error": {
       "cannot_connect": "Unable to connect to clock.bh. Please check your internet connection."
     },
     "abort": {
-      "already_configured": "Clock.bh is already configured."
+      "already_configured": "This timezone is already configured."
     }
   }
 }
