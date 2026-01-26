@@ -3,10 +3,11 @@
   "name": "Clock.bh - World Time",
   "codeowners": ["@iret33"],
   "config_flow": true,
+  "dependencies": ["http"],
   "documentation": "https://github.com/iret33/ha-clock-bh",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/iret33/ha-clock-bh/issues",
   "requirements": ["aiohttp>=3.8.0"],
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
