@@ -1,7 +1,13 @@
 # Clock.bh - World Time for Home Assistant
 
-[![HACS Action](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml/badge.svg)](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml)
-[![hassfest](https://github.com/iret33/ha-clock-bh/actions/workflows/hassfest.yml/badge.svg)](https://github.com/iret33/ha-clock-bh/actions/workflows/hassfest.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/iret33/ha-clock-bh?style=flat-square)](https://github.com/iret33/ha-clock-bh/releases)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/iret33/ha-clock-bh/validate.yml?style=flat-square&label=validate)](https://github.com/iret33/ha-clock-bh/actions/workflows/validate.yml)
+[![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=flat-square)](https://github.com/hacs/integration)
+[![License](https://img.shields.io/github/license/iret33/ha-clock-bh?style=flat-square)](LICENSE)
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2024.1.0+-blue?style=flat-square)](https://www.home-assistant.io/)
+[![GitHub Stars](https://img.shields.io/github/stars/iret33/ha-clock-bh?style=flat-square)](https://github.com/iret33/ha-clock-bh/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/iret33/ha-clock-bh?style=flat-square)](https://github.com/iret33/ha-clock-bh/issues)
+[![Maintenance](https://img.shields.io/maintenance/yes/2026?style=flat-square)](https://github.com/iret33/ha-clock-bh)
 
 A Home Assistant custom integration that provides accurate world time from [clock.bh](https://clock.bh) - the official Bahrain NTP Time Server. Includes a beautiful animated Lovelace card matching the clock.bh design.
 
